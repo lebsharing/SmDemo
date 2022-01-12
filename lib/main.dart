@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:sm/module/shopping/views/shop_home.dart';
+import 'package:sm/sm_home_page.dart';
 
 void main() {
   runApp(const MyApp());
+  // runApp(const ShopAppPage());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +28,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: SmHomePage(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
