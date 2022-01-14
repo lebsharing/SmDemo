@@ -1,11 +1,18 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:sm/module/bloc/bloc_home.dart';
+import 'package:sm/module/bloc/common/my_bloc_observer.dart';
 import 'package:sm/module/shopping/views/shop_home.dart';
 import 'package:sm/sm_home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
   // runApp(const ShopAppPage());
+  ///Bloc runApp
+  BlocOverrides.runZoned(() {
+    runApp(const BlocAppPage());
+  }, blocObserver: MyBlocObserver());
 }
 
 class MyApp extends StatelessWidget {

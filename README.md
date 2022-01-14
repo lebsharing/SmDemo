@@ -64,6 +64,8 @@ A State Manager use example.
     Provider/ScopedModel/Redux/BloC/MobX
     1、Provider的使用
     
+    2、BloC
+    
 
 三、参考链接
     how to choose between Redux's store and React's State;//https://github.com/reduxjs/redux/issues/1287#issuecomment-175351978
