@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sm/module/bloc/bloc_home.dart';
 import 'package:sm/module/bloc/common/my_bloc_observer.dart';
+import 'package:sm/module/bloc/eg/bloc_with_stream/bloc_with_stream_page.dart';
 import 'package:sm/module/shopping/views/shop_home.dart';
 import 'package:sm/sm_home_page.dart';
 
@@ -13,6 +14,9 @@ void main() {
   BlocOverrides.runZoned(() {
     runApp(const BlocAppPage());
   }, blocObserver: MyBlocObserver());
+
+  //TestMain
+  // runApp(TestMain());
 }
 
 class MyApp extends StatelessWidget {

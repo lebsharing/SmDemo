@@ -61,7 +61,7 @@ A State Manager use example.
     2、ChangeNotifier
  
 二、状态管理package
-    Provider/ScopedModel/Redux/BloC/MobX
+    Provider/ScopedModel/Redux/BloC/MobX/Get/
     1、Provider的使用
     
     2、BloC
