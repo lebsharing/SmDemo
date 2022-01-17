@@ -15,7 +15,6 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +23,7 @@ class _FormPageState extends State<FormPage> {
       ),
       body: BlocProvider(
         create: (ctx) {
-          return MyFormBloc( const MyFormState());
+          return MyFormBloc(const MyFormState());
         },
         child: const _BodyContent(),
       ),
@@ -40,9 +39,10 @@ class _BodyContent extends StatefulWidget {
 }
 
 class _BodyContentState extends State<_BodyContent> {
-
   FocusNode _emailFocusNode = FocusNode();
   FocusNode _pwdFocusNode = FocusNode();
+  String info =
+      "以Form的形式演示Bloc+FlutterBloc的使用方式,包含了BlocProvider、Bloc、BlocBuilder、BlocListener";
 
   @override
   void initState() {
@@ -68,33 +68,58 @@ class _BodyContentState extends State<_BodyContent> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<MyFormBloc,MyFormState>(
-      listener: (ctx,state) {
+    return BlocListener<MyFormBloc, MyFormState>(
+      listener: (ctx, state) {
         print("===listener:$state");
-        if(state.status == FormzStatus.submissionInProgress) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Submitting...")));
-        } else {
-
+        if (state.status == FormzStatus.submissionInProgress) {
+          ScaffoldMessenger.of(ctx)
+              .showSnackBar(const SnackBar(content: Text("Submitting...")));
+        } else if (state.status == FormzStatus.submissionSuccess) {
+          ScaffoldMessenger.of(ctx).hideCurrentSnackBar();
+          showSuccessDialog(ctx);
         }
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const Text(
-              "以Form的形式演示Bloc+FlutterBloc的使用方式",
+            Text(
+              "$info",
               style: TextStyle(fontSize: 18),
             ),
             _EmailWidget(focusNode: _emailFocusNode),
             _PasswordWidget(focusNode: _pwdFocusNode),
-            _SubmitButton(),
+            _SubmitButton(
+              callback: () {
+                FocusScope.of(context).unfocus();
+              },
+            ),
           ],
         ),
       ),
     );
   }
-}
 
+  void showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (bContext) {
+        return AlertDialog(
+          title: const Text("Success"),
+          content: const Text("恭喜您，登陆成功"),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(bContext).pop();
+              },
+              child: const Text("Confirm"),
+            )
+          ],
+        );
+      },
+    );
+  }
+}
 
 class _EmailWidget extends StatelessWidget {
   final FocusNode focusNode;
@@ -152,7 +177,7 @@ class _PasswordWidget extends StatelessWidget {
               hintText: "Please input eamil",
               helperText: "input email.eg: jike@gmil.com",
               errorText: state.password.invalid
-                  ? "please ensure the password at least 8 charactes"
+                  ? "Password must be at least 8 characters and contain at least one letter and number"
                   : ""),
           // keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
@@ -166,19 +191,28 @@ class _PasswordWidget extends StatelessWidget {
 }
 
 class _SubmitButton extends StatelessWidget {
+  final Function()? callback;
+
+  const _SubmitButton({Key? key, this.callback}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyFormBloc, MyFormState>(
-      buildWhen: (previous,current) => previous.status != current.status,
+      buildWhen: (previous, current) => previous.status != current.status,
       builder: (ctx, state) {
         print("--btn---${state.status.isValidated}");
         return ElevatedButton(
-          // onPressed: state.status.isValidated ? () {
+          onPressed: state.status.isValidated
+              ? () {
+                  context.read<MyFormBloc>().add(FormSubmitEvent());
+                  if (callback != null) {
+                    callback!();
+                  }
+                }
+              : null,
+          // onPressed: (){
           //   context.read<MyFormBloc>().add(FormSubmitEvent());
-          // } : null,
-          onPressed: (){
-            context.read<MyFormBloc>().add(FormSubmitEvent());
-          },
+          // },
           child: const Text("Submit"),
         );
       },
