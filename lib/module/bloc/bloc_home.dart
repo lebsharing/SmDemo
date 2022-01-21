@@ -98,6 +98,13 @@ class BlocHomePageState extends State<BlocHomePage> {
                     child: const Text("bloc with stream"),
                     style: _buttonStyle,
                   ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, BlRoute.blComplexListPage);
+                    },
+                    child: const Text("complex list"),
+                    style: _buttonStyle,
+                  ),
                 ],
               ),
             ],
