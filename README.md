@@ -10,6 +10,7 @@ A State Manager use example.
 
 一、Ephemeral State
     setState/ChangeNotifier/InheritedWidget/InheritedNotifier/InheritedModel/
+
     1、InheritedWidget
         InheritedWidget是一个向其子Widget共享数据的Widget.在InheritedWidget的子Widget中可以任意使用其共享的数据。
         使用方式（参考例子：sm/lib/module/base_eg/inherited_widget_eg.dart）
@@ -58,6 +59,7 @@ A State Manager use example.
             _hadUnsatisfiedDependencies = true;
             return null;
         }
+
     2、ChangeNotifier
  
 二、状态管理package
