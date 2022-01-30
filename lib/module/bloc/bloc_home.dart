@@ -105,6 +105,13 @@ class BlocHomePageState extends State<BlocHomePage> {
                     child: const Text("complex list"),
                     style: _buttonStyle,
                   ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, BlRoute.blInitalListPage);
+                    },
+                    child: const Text("initial list"),
+                    style: _buttonStyle,
+                  ),
                 ],
               ),
             ],

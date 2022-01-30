@@ -4,6 +4,7 @@ import 'package:sm/module/bloc/base_bloc/cubit_page.dart';
 import 'package:sm/module/bloc/eg/bloc_with_stream/bloc_with_stream_page.dart';
 import 'package:sm/module/bloc/eg/complex_list/complex_list_page.dart';
 import 'package:sm/module/bloc/eg/form_validate/form_page.dart';
+import 'package:sm/module/bloc/eg/infinite_list/view/post_page.dart';
 
 class BlRoute {
   static String blHome = "/";
@@ -14,6 +15,7 @@ class BlRoute {
   static String blFormValidatePage = "/formValidatePage";
   static String blBlocWithStreamPage = "/blocWithStreamPage";
   static String blComplexListPage = "/complexListPage";
+  static String blInitalListPage = "/initalListPage";
 
   static Map<String,WidgetBuilder> routes = {
     blCubitPage:(context) => const CubitPage(),
@@ -22,6 +24,7 @@ class BlRoute {
     blCounterBlocPage: (context) => const CounterBlocPage(),
     blFormValidatePage: (context) => const FormPage(),
     blBlocWithStreamPage: (context) => const BlocWithStreamContentPage(),
-    blComplexListPage: (context) => const ComplexListPage()
+    blComplexListPage: (context) => const ComplexListPage(),
+    blInitalListPage: (context) => const PostPage()
   };
 }
